@@ -1,0 +1,133 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Icon from "../components/ui/Icon.astro";
+import IconTile from "../components/ui/IconTile.astro";
+import SectionCard from "../components/ui/SectionCard.astro";
+import { HERO, IDENTITY, CURRENT_FOCUS, CONTACT_LINKS } from "../lib/site-config";
+import { formatDate } from "../lib/format";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 5);
+
+const projects = (await getCollection("projects", ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+---
+
+<BaseLayout>
+  <div class="mx-auto max-w-5xl px-6 py-16">
+    <!-- Hero -->
+    <section class="grid gap-12 border-b border-line pb-16 md:grid-cols-2 md:gap-8">
+      <div>
+        <h1 class="font-serif text-5xl leading-[1.05] text-ink sm:text-6xl">
+          {HERO.headingLines.map((line) => <span class="block">{line}</span>)}
+        </h1>
+        <p class="mt-6 max-w-md text-lg text-ink-muted">{HERO.subtitle}</p>
+        <div class="mt-8 flex flex-wrap items-center gap-3">
+          <a
+            href={HERO.primaryCta.href}
+            class="inline-flex items-center gap-2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-canvas transition-opacity hover:opacity-90"
+          >
+            {HERO.primaryCta.label}
+            <Icon name="arrow-right" class="h-4 w-4" />
+          </a>
+          <a
+            href={HERO.secondaryCta.href}
+            class="inline-flex items-center gap-2 rounded-full border border-line px-5 py-2.5 text-sm font-medium text-ink transition-colors hover:bg-surface"
+          >
+            {HERO.secondaryCta.label}
+            <Icon name="layout-grid" class="h-4 w-4" />
+          </a>
+        </div>
+      </div>
+
+      <div class="flex flex-col gap-6 md:border-l md:border-line md:pl-10">
+        {IDENTITY.map((item) => <IconTile {...item} />)}
+      </div>
+    </section>
+
+    <!-- Three column -->
+    <section class="grid gap-6 py-16 lg:grid-cols-3">
+      <SectionCard title="Current Focus">
+        {CURRENT_FOCUS.map((item) => <IconTile {...item} />)}
+      </SectionCard>
+
+      <SectionCard title="Recent Writing" viewAllHref="/blog">
+        {
+          posts.length === 0 ? (
+            <p class="text-sm text-ink-muted">还没有文章，敬请期待。</p>
+          ) : (
+            posts.map((post) => (
+              <a href={`/blog/${post.id}/`} class="group block">
+                <p class="font-medium text-ink group-hover:underline">{post.data.title}</p>
+                <p class="mt-1 text-xs text-ink-muted">
+                  {post.data.tags.join(" · ")}
+                  {post.data.tags.length > 0 && " · "}
+                  {formatDate(post.data.pubDate)}
+                </p>
+              </a>
+            ))
+          )
+        }
+      </SectionCard>
+
+      <SectionCard title="Recent Projects" viewAllHref="/projects">
+        {
+          projects.length === 0 ? (
+            <p class="text-sm text-ink-muted">项目正在整理中。</p>
+          ) : (
+            projects.map((project) => (
+              <div>
+                <div class="flex items-start gap-3">
+                  <div class="flex h-9 w-9 flex-none items-center justify-center rounded-xl bg-surface text-ink">
+                    <Icon name="package" class="h-4 w-4" />
+                  </div>
+                  <div class="min-w-0">
+                    <p class="font-medium text-ink">{project.data.title}</p>
+                    <p class="mt-1 text-sm text-ink-muted">{project.data.description}</p>
+                    {project.data.repo && (
+                      <a
+                        href={project.data.repo}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="mt-2 inline-flex items-center gap-1 rounded-full border border-line px-2.5 py-1 text-xs text-ink-muted transition-colors hover:text-ink"
+                      >
+                        <Icon name="github" class="h-3.5 w-3.5" />
+                        GitHub
+                      </a>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ))
+          )
+        }
+      </SectionCard>
+    </section>
+
+    <!-- Get in touch -->
+    <section class="flex flex-col items-start justify-between gap-6 rounded-2xl border border-line p-8 sm:flex-row sm:items-center">
+      <div>
+        <h2 class="font-medium text-ink">Get in touch</h2>
+        <p class="mt-2 max-w-sm text-sm text-ink-muted">
+          欢迎聊天、交流或合作，通过邮箱或 GitHub 都能找到我。
+        </p>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        {
+          CONTACT_LINKS.map((c) => (
+            <a
+              href={c.href}
+              class="inline-flex items-center gap-2 rounded-full border border-line px-4 py-2 text-sm text-ink transition-colors hover:bg-surface"
+            >
+              <Icon name={c.icon} class="h-4 w-4" />
+              {c.label}
+            </a>
+          ))
+        }
+      </div>
+    </section>
+  </div>
+</BaseLayout>

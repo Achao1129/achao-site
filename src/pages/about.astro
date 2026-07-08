@@ -1,0 +1,24 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { SITE } from "../lib/site-config";
+---
+
+<BaseLayout title="About" description={`关于 ${SITE.name}`}>
+  <div class="mx-auto max-w-3xl px-6 py-16">
+    <h1 class="font-serif text-4xl text-ink sm:text-5xl">About</h1>
+
+    <div class="mt-8 flex flex-col gap-5 text-lg leading-relaxed text-ink-muted">
+      <p>
+        你好，我是 Achao。这里是我的个人数字花园 —— 一个持续生长、不追求完美的地方，
+        记录我在 AI、代码、基础设施上的探索，也记录跑步和长期主义的一些想法。
+      </p>
+      <p>
+        比起写"完成品"，我更喜欢把正在进行中的想法先写下来，随时间不断修改和补充。
+        如果你看到某篇内容还很粗糙，那大概率是它还在生长。
+      </p>
+      <p>
+        这段介绍还是占位文字 —— 编辑 <code class="rounded bg-surface px-1.5 py-0.5 text-sm text-ink">src/pages/about.astro</code> 换成你的真实故事。
+      </p>
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,46 @@
+@import "tailwindcss";
+@import "@fontsource-variable/fraunces";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-serif: "Fraunces Variable", ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  /* light mode (default) design tokens */
+  --color-canvas: #ffffff;
+  --color-canvas-subtle: #fafafa;
+  --color-surface: #f5f5f5;
+  --color-line: #e5e5e5;
+  --color-ink: #171717;
+  --color-ink-muted: #737373;
+}
+
+:root {
+  color-scheme: light;
+}
+
+.dark {
+  color-scheme: dark;
+  --color-canvas: #0a0a0a;
+  --color-canvas-subtle: #101010;
+  --color-surface: #1a1a1a;
+  --color-line: #292929;
+  --color-ink: #fafafa;
+  --color-ink-muted: #a3a3a3;
+}
+
+html {
+  font-family: var(--font-sans);
+}
+
+body {
+  min-height: 100dvh;
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+}
+
+* {
+  border-color: var(--color-line);
+}

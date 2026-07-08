@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Icon from "../../components/ui/Icon.astro";
+---
+
+<BaseLayout title="Fitness" description="跑步、健身与饮食记录。">
+  <div class="mx-auto max-w-3xl px-6 py-16">
+    <h1 class="font-serif text-4xl text-ink sm:text-5xl">Fitness</h1>
+    <p class="mt-4 text-lg text-ink-muted">跑步、健身与饮食记录。</p>
+
+    <div class="mt-12 flex flex-col items-center gap-4 rounded-2xl border border-dashed border-line px-6 py-20 text-center">
+      <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-surface text-ink">
+        <Icon name="footprints" class="h-6 w-6" />
+      </div>
+      <p class="font-medium text-ink">正在设计记录方式</p>
+      <p class="max-w-sm text-sm text-ink-muted">
+        这里以后会记录跑步、训练和饮食数据。数据结构还在设计中，敬请期待。
+      </p>
+    </div>
+  </div>
+</BaseLayout>
