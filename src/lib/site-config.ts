@@ -72,6 +72,6 @@ export const CURRENT_FOCUS = [
 
 export const CONTACT_LINKS = [
   { icon: "mail", label: "hello@achao.us.ci", href: "mailto:hello@achao.us.ci" },
-  { icon: "github", label: "github.com/achao", href: "https://github.com/achao" },
+  { icon: "github", label: "github.com/Achao1129", href: "https://github.com/Achao1129" },
   { icon: "link", label: "achao.us.ci", href: "https://achao.us.ci" },
 ] as const;

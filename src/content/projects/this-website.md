@@ -2,7 +2,7 @@
 title: "achao.us.ci"
 description: "这个网站本身 —— 用 Astro + TypeScript + Tailwind 搭建的个人数字花园。"
 pubDate: 2026-07-08
-repo: "https://github.com/achao/achao-site"
+repo: "https://github.com/Achao1129/achao-site"
 tags: ["astro", "typescript", "tailwindcss"]
 status: "in-progress"
 ---
