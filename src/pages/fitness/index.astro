@@ -1,21 +1,44 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import Icon from "../../components/ui/Icon.astro";
+import IconTile from "../../components/ui/IconTile.astro";
+
+const TRACKING_AREAS = [
+  {
+    icon: "footprints",
+    title: "跑步",
+    description: "记录里程、时间、体感与恢复，关注稳定积累而不是单次成绩。",
+  },
+  {
+    icon: "activity",
+    title: "训练",
+    description: "整理基础力量、活动度和交叉训练，让运动习惯更完整。",
+  },
+  {
+    icon: "book-open",
+    title: "饮食与恢复",
+    description: "观察饮食、睡眠和身体状态，寻找适合长期坚持的节奏。",
+  },
+] as const;
 ---
 
 <BaseLayout title="Fitness" description="跑步、健身与饮食记录。">
   <div class="mx-auto max-w-3xl px-6 py-16">
     <h1 class="font-serif text-4xl text-ink sm:text-5xl">Fitness</h1>
-    <p class="mt-4 text-lg text-ink-muted">跑步、健身与饮食记录。</p>
+    <p class="mt-4 max-w-2xl text-lg leading-relaxed text-ink-muted">
+      把跑步、训练和饮食当作一项长期项目。这里记录过程、体感和习惯的变化，
+      不只关注数字，也关注能否持续。
+    </p>
 
-    <div class="mt-12 flex flex-col items-center gap-4 rounded-2xl border border-dashed border-line px-6 py-20 text-center">
-      <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-surface text-ink">
-        <Icon name="footprints" class="h-6 w-6" />
-      </div>
-      <p class="font-medium text-ink">正在设计记录方式</p>
-      <p class="max-w-sm text-sm text-ink-muted">
-        这里以后会记录跑步、训练和饮食数据。数据结构还在设计中，敬请期待。
+    <section class="mt-12 grid gap-6 rounded-2xl border border-line p-6 sm:p-8">
+      {TRACKING_AREAS.map((area) => <IconTile {...area} />)}
+    </section>
+
+    <section class="mt-10 border-l-2 border-line pl-6">
+      <h2 class="font-medium text-ink">记录原则</h2>
+      <p class="mt-3 leading-relaxed text-ink-muted">
+        以真实、简单、可持续为主。保留有助于回顾和调整的信息，避免为了记录而记录，
+        也不把短期波动当成最终结论。
       </p>
-    </div>
+    </section>
   </div>
 </BaseLayout>
